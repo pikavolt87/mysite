@@ -16,7 +16,7 @@
             <div id="clock"></div>
         </div>
         <div class="main">
-           <div class='widget'><h3>widget 01</h3></div>
+           <div class='widget'><h3>Note Pad</h3> <div class="note"><textarea id="note_area" name="message" rows="20" cols="40"></textarea><p><button class="savenotebtn">save</button></p> </div></div>
            <div class='widget'><h3>widget 02</h3></div>
            <div class='widget'><h3>widget 03</h3></div>
         </div>
@@ -24,6 +24,14 @@
 </body>
 
 <script>
+    try {
+var loadNotes = localStorage.getItem("notes");
+}
+catch(err) {
+var loadNotes = "Enter your notes here and click 'Save'";
+}
+$("#note_area").val(loadNotes);
+
 var sp = '/';
 var today = new Date();
 var dd = today.getDate();
@@ -33,6 +41,10 @@ if (dd<10) dd ='0' + dd;
 if (mm<10) mm ='0' + mm;
 date = mm + sp + dd + sp + yyyy;
 $("#date").html(date);
+$(".savenotebtn").click(function(){
+ var currentNotes = $("#note_area").val();
+    localStorage.setItem("notes", currentNotes);    
+});
 </script>
 </html>
 
